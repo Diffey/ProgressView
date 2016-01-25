@@ -36,6 +36,7 @@ public class ProgressView extends View {
         progressColor = typedArray.getColor(R.styleable.ProgressView_progressColor, Color.BLUE);
         text = typedArray.getString(R.styleable.ProgressView_text);
         textColor = typedArray.getColor(R.styleable.ProgressView_textColor, Color.WHITE);
+        typedArray.recycle();
         init();
     }
 

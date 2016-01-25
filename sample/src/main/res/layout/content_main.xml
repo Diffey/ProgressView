@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:progressview="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -11,6 +11,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.diffey.view.sample.MainActivity"
+    android:orientation="vertical"
     tools:showIn="@layout/activity_main">
 
     <com.diffey.view.progressview.ProgressView
@@ -20,4 +21,21 @@
         progressview:progress="80"
         progressview:progressColor="#6e63bf"
         progressview:text="积极性 80%" />
-</RelativeLayout>
+
+    <com.diffey.view.progressview.ProgressView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        progressview:max="100"
+        progressview:progress="70"
+        progressview:progressColor="#2a283e"
+        progressview:text="活跃度 70%" />
+
+    <com.diffey.view.progressview.ProgressView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        progressview:max="100"
+        progressview:progress="30"
+        progressview:progressColor="#9e58c6"
+        progressview:text="完成度 30%"
+        progressview:textColor="#fff"/>
+</LinearLayout>

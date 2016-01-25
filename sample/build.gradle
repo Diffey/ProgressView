@@ -25,5 +25,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.android.support:design:23.1.1'
 
-    compile project(':progressview')
+//    compile project(':progressview')
+    compile 'com.diffey.view.progressview:progressview:0.1'
 }
