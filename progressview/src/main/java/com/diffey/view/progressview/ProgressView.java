@@ -198,7 +198,7 @@ public class ProgressView extends View {
     }
 
     /**
-     * 检查progress
+     * 检查Progress
      */
     private void checkProgress() {
         if (progress >= max) {
