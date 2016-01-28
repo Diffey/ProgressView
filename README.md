@@ -7,7 +7,7 @@
 ### 使用
 1.导入依赖
 ```java
-compile 'com.diffey.view.progressview:progressview:0.2.0'
+    compile 'com.diffey.view.progressview:progressview:0.2.1'
 ```
 
 2.布局中使用
