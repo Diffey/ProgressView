@@ -2,11 +2,13 @@
 简单进度条
 
 ### 截图
-<img src="./sc1.png" width="200">
+<img src="./sc1.png">
 
 ### 使用
 1.导入依赖
+```java
 compile 'com.diffey.view.progressview:progressview:0.1'
+```
 
 2.布局中使用
 ```java
