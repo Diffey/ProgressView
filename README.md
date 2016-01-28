@@ -2,7 +2,7 @@
 简单进度条
 
 ### 截图
-<img src="./sc1.png" width="200">
+<img src="./sc1.png" width="300">
 
 ### 使用
 1.导入依赖
