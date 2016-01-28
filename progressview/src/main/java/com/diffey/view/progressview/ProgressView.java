@@ -1,5 +1,8 @@
 package com.diffey.view.progressview;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -7,6 +10,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
 
 /**
  * Created by diff on 2016/1/22.
@@ -29,6 +33,7 @@ public class ProgressView extends View {
     private int textColor = DEF_TEXT_COLOR;
     private float textSize = DEF_TEXT_SIZE;
     private float textLeftPadding = DEF_TEXT_LEFT_PADDING;
+    private boolean isAnimator = false;
 
     private Paint mPaint;
 
@@ -132,6 +137,39 @@ public class ProgressView extends View {
         invalidate();
     }
 
+
+    /**
+     * 显示进度加载动画
+     *
+     * @param duration 动画间隔
+     */
+    public void showAnimator(int duration) {
+        ValueAnimator animator = ValueAnimator.ofInt(0, progress);
+        animator.setDuration(duration);
+        animator.setInterpolator(new AccelerateInterpolator(2f));
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                setProgress((int) animation.getAnimatedValue());
+            }
+        });
+        animator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                super.onAnimationStart(animation);
+                isAnimator = true;
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                isAnimator = false;
+                invalidate();
+            }
+        });
+        animator.start();
+    }
+
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
@@ -140,18 +178,31 @@ public class ProgressView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        //绘制背景
         canvas.drawColor(backgroundColor);
 
+        //绘制progress
         int width = getWidth();
         int height = getHeight();
         mPaint.setColor(progressColor);
+        checkProgress();
         canvas.drawRect(0, 0, width * progress / max, height, mPaint);
 
-        if (text != null) {
+        //绘制文字
+        if (text != null && !isAnimator) {
             mPaint.setColor(textColor);
             mPaint.setTextSize(textSize);
             Paint.FontMetricsInt fontMetrics = mPaint.getFontMetricsInt();
             canvas.drawText(text, textLeftPadding, (height - fontMetrics.top - fontMetrics.bottom) / 2, mPaint);
+        }
+    }
+
+    /**
+     * 检查progress
+     */
+    private void checkProgress() {
+        if (progress >= max) {
+            progress = max;
         }
     }
 }
