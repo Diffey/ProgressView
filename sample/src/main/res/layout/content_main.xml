@@ -5,22 +5,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.diffey.view.sample.MainActivity"
-    android:orientation="vertical"
     tools:showIn="@layout/activity_main">
 
     <com.diffey.view.progressview.ProgressView
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        progressview:backgroundColor="#eee"
         progressview:max="100"
         progressview:progress="80"
         progressview:progressColor="#6e63bf"
-        progressview:text="积极性 80%" />
+        progressview:text="积极性 80%"
+        progressview:textColor="#eee"
+        progressview:textLeftPadding="5dp"
+        progressview:textSize="25sp" />
 
     <com.diffey.view.progressview.ProgressView
         android:layout_width="match_parent"
@@ -37,5 +41,5 @@
         progressview:progress="30"
         progressview:progressColor="#9e58c6"
         progressview:text="完成度 30%"
-        progressview:textColor="#fff"/>
+        progressview:textColor="#fff" />
 </LinearLayout>
