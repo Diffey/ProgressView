@@ -22,7 +22,8 @@ public class ProgressView extends View {
     private static final int DEF_BACKGROUND_COLOR = Color.TRANSPARENT;
     private static final int DEF_TEXT_COLOR = Color.WHITE;
     private static final float DEF_TEXT_SIZE = 25;
-    private static final float DEF_TEXT_LEFT_PADDING = 10;
+    private static final int DEF_TEXT_GRAVITY = 0;
+    private static final float DEF_TEXT_GRAVITY_PADDING = 10;
 
 
     private int max = DEF_MAX;
@@ -32,7 +33,8 @@ public class ProgressView extends View {
     private String text;
     private int textColor = DEF_TEXT_COLOR;
     private float textSize = DEF_TEXT_SIZE;
-    private float textLeftPadding = DEF_TEXT_LEFT_PADDING;
+    private int textGravity = DEF_TEXT_GRAVITY;
+    private float textGravityPadding = DEF_TEXT_GRAVITY_PADDING;
     private boolean isAnimator = false;
 
     private Paint mPaint;
@@ -59,7 +61,8 @@ public class ProgressView extends View {
             text = typedArray.getString(R.styleable.ProgressView_text);
             textColor = typedArray.getColor(R.styleable.ProgressView_textColor, DEF_TEXT_COLOR);
             textSize = typedArray.getDimension(R.styleable.ProgressView_textSize, DEF_TEXT_SIZE);
-            textLeftPadding = typedArray.getDimension(R.styleable.ProgressView_textLeftPadding, DEF_TEXT_LEFT_PADDING);
+            textGravity = typedArray.getInt(R.styleable.ProgressView_textGravity, DEF_TEXT_GRAVITY);
+            textGravityPadding = typedArray.getDimension(R.styleable.ProgressView_textGravityPadding, DEF_TEXT_GRAVITY_PADDING);
             typedArray.recycle();
         }
     }
@@ -128,12 +131,12 @@ public class ProgressView extends View {
         invalidate();
     }
 
-    public float getTextLeftPadding() {
-        return textLeftPadding;
+    public float getTextGravityPadding() {
+        return textGravityPadding;
     }
 
-    public void setTextLeftPadding(float textLeftPadding) {
-        this.textLeftPadding = textLeftPadding;
+    public void setTextGravityPadding(float textGravityPadding) {
+        this.textGravityPadding = textGravityPadding;
         invalidate();
     }
 
@@ -182,18 +185,25 @@ public class ProgressView extends View {
         canvas.drawColor(backgroundColor);
 
         //绘制progress
-        int width = getWidth();
-        int height = getHeight();
-        mPaint.setColor(progressColor);
         checkProgress();
-        canvas.drawRect(0, 0, width * progress / max, height, mPaint);
+        int progressWidth = getWidth() * progress / max;
+        int progressHeight = getHeight();
+        mPaint.setColor(progressColor);
+        canvas.drawRect(0, 0, progressWidth, progressHeight, mPaint);
 
         //绘制文字
         if (text != null && !isAnimator) {
             mPaint.setColor(textColor);
             mPaint.setTextSize(textSize);
             Paint.FontMetricsInt fontMetrics = mPaint.getFontMetricsInt();
-            canvas.drawText(text, textLeftPadding, (height - fontMetrics.top - fontMetrics.bottom) / 2, mPaint);
+
+            float tX;
+            if (textGravity == 0) {
+                tX = textGravityPadding;
+            } else {
+                tX = progressWidth - (mPaint.measureText(text) + textGravityPadding);
+            }
+            canvas.drawText(text, tX, (progressHeight - fontMetrics.top - fontMetrics.bottom) / 2, mPaint);
         }
     }
 
