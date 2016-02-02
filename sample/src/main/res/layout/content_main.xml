@@ -24,20 +24,23 @@
         progressview:progressColor="#6e63bf"
         progressview:text="积极性 80%"
         progressview:textColor="#eee"
-        progressview:textLeftPadding="5dp"
+        progressview:textGravity="left"
+        progressview:textGravityPadding="5dp"
         progressview:textSize="25sp" />
 
     <com.diffey.view.progressview.ProgressView
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:layout_marginTop="10dp"
         progressview:max="100"
         progressview:progress="70"
-        progressview:progressColor="#2a283e"
+        progressview:progressColor="#5eba54"
         progressview:text="活跃度 70%" />
 
     <com.diffey.view.progressview.ProgressView
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:layout_marginTop="10dp"
         progressview:max="100"
         progressview:progress="30"
         progressview:progressColor="#9e58c6"
