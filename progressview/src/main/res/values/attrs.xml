@@ -13,5 +13,6 @@
             <enum name="right" value="1" />
         </attr>
         <attr name="textGravityPadding" format="dimension" />
+        <attr name="textOverColor" format="color"/>
     </declare-styleable>
 </resources>

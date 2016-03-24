@@ -26,7 +26,7 @@ dependencies {
     compile 'com.android.support:design:23.1.1'
 
     compile project(':progressview')
-//    compile 'com.diffey.view.progressview:progressview:0.2.1'
+//    compile 'com.diffey.view.progressview:progressview:0.3.0'
 
     compile 'com.jakewharton:butterknife:7.0.1'
 

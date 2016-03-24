@@ -21,6 +21,7 @@ public class ProgressView extends View {
     private static final int DEF_PROGRESS_COLOR = Color.BLUE;
     private static final int DEF_BACKGROUND_COLOR = Color.TRANSPARENT;
     private static final int DEF_TEXT_COLOR = Color.WHITE;
+    private static final int DEF_TEXT_OVER_COLOR = Color.BLACK;
     private static final float DEF_TEXT_SIZE = 25;
     private static final int DEF_TEXT_GRAVITY = 0;
     private static final float DEF_TEXT_GRAVITY_PADDING = 10;
@@ -32,6 +33,7 @@ public class ProgressView extends View {
     private int backgroundColor = DEF_BACKGROUND_COLOR;
     private String text;
     private int textColor = DEF_TEXT_COLOR;
+    private int textOverColor = DEF_TEXT_OVER_COLOR;
     private float textSize = DEF_TEXT_SIZE;
     private int textGravity = DEF_TEXT_GRAVITY;
     private float textGravityPadding = DEF_TEXT_GRAVITY_PADDING;
@@ -60,6 +62,7 @@ public class ProgressView extends View {
             backgroundColor = typedArray.getColor(R.styleable.ProgressView_backgroundColor, DEF_BACKGROUND_COLOR);
             text = typedArray.getString(R.styleable.ProgressView_text);
             textColor = typedArray.getColor(R.styleable.ProgressView_textColor, DEF_TEXT_COLOR);
+            textOverColor = typedArray.getColor(R.styleable.ProgressView_textOverColor, DEF_TEXT_OVER_COLOR);
             textSize = typedArray.getDimension(R.styleable.ProgressView_textSize, DEF_TEXT_SIZE);
             textGravity = typedArray.getInt(R.styleable.ProgressView_textGravity, DEF_TEXT_GRAVITY);
             textGravityPadding = typedArray.getDimension(R.styleable.ProgressView_textGravityPadding, DEF_TEXT_GRAVITY_PADDING);
@@ -140,6 +143,14 @@ public class ProgressView extends View {
         invalidate();
     }
 
+    public int getTextOverColor() {
+        return textOverColor;
+    }
+
+    public void setTextOverColor(int textOverColor) {
+        this.textOverColor = textOverColor;
+        invalidate();
+    }
 
     /**
      * 显示进度加载动画
@@ -198,10 +209,15 @@ public class ProgressView extends View {
             Paint.FontMetricsInt fontMetrics = mPaint.getFontMetricsInt();
 
             float tX;
-            if (textGravity == 0) {
-                tX = textGravityPadding;
+            if (progressWidth < mPaint.measureText(text)) {
+                mPaint.setColor(textOverColor);
+                tX = textGravityPadding + progressWidth;
             } else {
-                tX = progressWidth - (mPaint.measureText(text) + textGravityPadding);
+                if (textGravity == 0) {
+                    tX = textGravityPadding;
+                } else {
+                    tX = progressWidth - (mPaint.measureText(text) + textGravityPadding);
+                }
             }
             canvas.drawText(text, tX, (progressHeight - fontMetrics.top - fontMetrics.bottom) / 2, mPaint);
         }

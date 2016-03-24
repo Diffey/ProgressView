@@ -35,15 +35,27 @@
         progressview:max="100"
         progressview:progress="70"
         progressview:progressColor="#5eba54"
-        progressview:text="活跃度 70%" />
+        progressview:text="活跃度 70%"
+        progressview:backgroundColor="#8fb3a8"/>
+
+    <com.diffey.view.progressview.ProgressView
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:layout_marginTop="10dp"
+    progressview:max="100"
+    progressview:progress="30"
+    progressview:progressColor="#9e58c6"
+    progressview:text="完成度 30%"
+    progressview:textColor="#fff" />
 
     <com.diffey.view.progressview.ProgressView
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginTop="10dp"
         progressview:max="100"
-        progressview:progress="30"
+        progressview:progress="10"
         progressview:progressColor="#9e58c6"
-        progressview:text="完成度 30%"
-        progressview:textColor="#fff" />
+        progressview:text="完成度 10%"
+        progressview:textColor="#fff"
+        progressview:textOverColor="#d73b3b"/>
 </LinearLayout>
