@@ -7,7 +7,7 @@
 ### 使用
 1.导入依赖
 ```java
-    compile 'com.diffey.view.progressview:progressview:0.3.0'
+    compile 'com.diffey.view.progressview:progressview:0.3.1'
 ```
 
 2.布局中使用
@@ -24,5 +24,6 @@
             progressview:textColor="#eee"
             progressview:textGravity="right"
             progressview:textGravityPadding="5dp"
-            progressview:textSize="25sp" />
+            progressview:textSize="25sp" 
+            progressview:textOverColor="#d73b3b"/>
 ``` 
